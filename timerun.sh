@@ -19,13 +19,13 @@ time ls > /dev/null
 echo -e "${RED} ^^^Time for normal ls^^^${NC}"
 
 # Compress and test ls
-sudo gzexe ls
+sudo gzexe /bin/ls
 echo "Running compressed ls"
-time ls > /dev/null
+time /bin/ls > /dev/null
 echo -e "${GREEN}^^^Time for compressed ls^^^${NC}"
-du -k ls
+du -k /bin/ls
 echo -e "${RED}^^^Size of compressed ls in Kilobytes^^^${NC}"
-du -k ls~
+du -k /bin/ls~
 echo -e "${GREEN}^^^Size of normal ls in kilobytes^^^${NC}"
 
 # Create and process textfile
@@ -34,42 +34,42 @@ echo "Creating textfile with sample content"
 touch $TEXTFILE
 echo "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit  in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat  non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." > $TEXTFILE
 echo "Running normal grep"
-time grep in $TEXTFILE > /dev/null
+time /bin/grep in $TEXTFILE > /dev/null
 echo -e "${RED}^^^Time for normal grep^^^${NC}"
 
 # Compress and test grep
-sudo gzexe grep
+sudo gzexe /bin/grep
 echo "Running compressed grep"
-time grep in $TEXTFILE > /dev/null
+time /bin/grep in $TEXTFILE > /dev/null
 echo -e "${GREEN}^^^Time for compressed grep^^^${NC}"
-du -k grep
+du -k /bin/grep
 echo -e "${GREEN}^^^Size of compressed grep^^^${NC}"
-du -k grep~
+du -k /bin/grep~
 echo -e "${RED}^^^Size of normal grep^^^${NC}"
 
 # Test whoami
 echo "Running normal whoami"
-time whoami
+time /bin/whoami
 echo -e "${RED}^^^Time for normal whoami^^^${NC}"
 
 # Compress and test whoami
-sudo gzexe whoami
-time whoami
+sudo gzexe /bin/whoami
+time /bin/whoami
 echo -e "${GREEN}^^^Time for compressed whoami^^^${NC}"
-du -k whoami
+du -k /bin/whoami
 echo -e "${GREEN}^^^Size of compressed whoami^^^${NC}"
-du -k whoami~
+du -k /bin/whoami~
 echo -e "${RED}^^^Size of normal whoami^^^${NC}"
 
 # Test Python script execution
-PYTHON_BIN="python3.12"
+PYTHON_BIN="/usr/bin/python3.12"
 echo "Running normal Python"
-time ./$PYTHON_BIN -c "print('Hello world')"
+time $PYTHON_BIN -c "print('Hello world')"
 echo -e "${RED}^^^Time for normal python^^^${NC}"
 
 # Compress and test Python
 sudo gzexe $PYTHON_BIN
-time ./$PYTHON_BIN -c "print('Hello world')"
+time $PYTHON_BIN -c "print('Hello world')"
 echo -e "${GREEN}^^^Time for Compressed python^^^${NC}"
 du -k $PYTHON_BIN
 echo -e "${GREEN}^^^Size of compressed python^^^${NC}"
@@ -80,30 +80,30 @@ echo -e "${RED}^^^Size of normal python^^^${NC}"
 NEWDIR="$CURRENT_DIR/newdir"
 mkdir $NEWDIR
 echo "Running normal rmdir"
-time rmdir $NEWDIR
+time /bin/rmdir $NEWDIR
 echo -e "${RED}^^^Time for normal rmdir^^^${NC}"
 
-sudo gzexe rmdir
+sudo gzexe /bin/rmdir
 mkdir $NEWDIR
-time rmdir $NEWDIR
+time /bin/rmdir $NEWDIR
 echo -e "${GREEN}^^^Time for compressed rmdir^^^${NC}"
-du -k rmdir
+du -k /bin/rmdir
 echo -e "${GREEN}^^^Size of compressed rmdir^^^${NC}"
-du -k rmdir~
+du -k /bin/rmdir~
 echo -e "${RED}^^^Size of normal rmdir^^^${NC}"
 
 # Decompress and clean up files
 echo -e "${RED}Decompressing grep${NC}"
-sudo gzexe -d grep
+sudo gzexe -d /bin/grep
 echo -e "${GREEN}Successfully decompressed grep${NC}"
 echo -e "${RED}Removing compressed grep~${NC}"
-sudo rm -f grep~
+sudo rm -f /bin/grep~
 
 echo -e "${RED}Decompressing whoami${NC}"
-sudo gzexe -d whoami
+sudo gzexe -d /bin/whoami
 echo -e "${GREEN}Successfully decompressed whoami${NC}"
 echo -e "${RED}Removing compressed whoami~${NC}"
-sudo rm -f whoami~
+sudo rm -f /bin/whoami~
 
 echo -e "${RED}Decompressing $PYTHON_BIN${NC}"
 sudo gzexe -d $PYTHON_BIN
@@ -112,16 +112,16 @@ echo -e "${RED}Removing compressed $PYTHON_BIN~${NC}"
 sudo rm -f ${PYTHON_BIN}~
 
 echo -e "${RED}Decompressing rmdir${NC}"
-sudo gzexe -d rmdir
+sudo gzexe -d /bin/rmdir
 echo -e "${GREEN}Successfully decompressed rmdir${NC}"
 echo -e "${RED}Removing compressed rmdir~${NC}"
-sudo rm -f rmdir~
+sudo rm -f /bin/rmdir~
 
 echo -e "${RED}Decompressing ls${NC}"
-sudo gzexe -d ls
+sudo gzexe -d /bin/ls
 echo -e "${GREEN}Successfully decompressed ls${NC}"
 echo -e "${RED}Removing compressed ls~${NC}"
-sudo rm -f ls~
+sudo rm -f /bin/ls~
 
 # Remove textfile
 rm -f $TEXTFILE
